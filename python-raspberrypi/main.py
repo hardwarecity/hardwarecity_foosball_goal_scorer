@@ -1,3 +1,6 @@
+# PORTO 20 sempre que recebe um impulso a 1 vindo do arduino (ou do sensor), incrementa o numero de golos da equipa A e manda notificação
+# PORTO 21 sempre que recebe um impulso a 1 vindo do arduino (ou do sensor), incrementa o numero de golos da equipa B e manda notificação
+
 from bottle import route, run, template
 import RPi.GPIO as GPIO
 __author__ = 'Rui Martins'
