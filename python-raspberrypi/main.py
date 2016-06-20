@@ -43,10 +43,12 @@ info = {
         "goals": 0,
         "players": [
             {
-                "name": "Rui Martins"
+                "name": "Rui Martins",
+                "avatar": "https://www.gravatar.com/avatar/040f98fba4259ac18a53d9a1f6addbe6"
             },
             {
-                "name": "Fábio Ferreira"
+                "name": "Fábio Ferreira",
+                "avatar": "https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-9/10411025_906767319351448_6274486805898773858_n.jpg?oh=a1298d61dcd1ac11c21302a3b2109442&oe=57C80780"
             }
         ]
     },
@@ -55,10 +57,12 @@ info = {
         "goals": 0,
         "players": [
             {
-                "name": "Francisco Mendes"
+                "name": "Francisco Mendes",
+                "avatar": "https://scontent.xx.fbcdn.net/v/t1.0-1/s100x100/10001368_694448010598388_898270615_n.jpg?oh=bddb4f1de1c40cf2b4528e971fed0b52&oe=57E2973B"
             },
             {
-                "name": "Miguel Almeida"
+                "name": "Miguel Almeida",
+                "avatar": "https://scontent.xx.fbcdn.net/v/t1.0-1/p100x100/483802_10151544048463659_1974167195_n.jpg?oh=7755df1af27d9254e5900a156afc0446&oe=57C47E20"
             }
         ]
     }
