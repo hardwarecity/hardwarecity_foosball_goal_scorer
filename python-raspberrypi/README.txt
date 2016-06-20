@@ -2,10 +2,9 @@ PROJECT: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Sensors <--> Arduino <--> Raspberry Pi <--> Firebase <--> Web App
 
-RASPBERRYPI:
+RASPBERRY PI:
 Listen (with interrupts) PORT 20 (Team A) and PORT 21 (Team B).
-When an trigger happens, the internal variables (goal counters) is updated, and an message is sent by firebase
-done.
+When a trigger happens, the internal variables (goal counters) is updated, and a message is sent by firebase by HTTP.
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

@@ -8,7 +8,7 @@ from bottle import route, run, template
 import json
 import requests
 import RPi.GPIO as GPIO
-__author__ = 'Rui Martins'
+__author__ = 'Hardware City'
 
 try:
     GPIO.cleanup()  # clean up GPIO
