@@ -70,7 +70,7 @@ info = {
 
 
 def _send_score():
-    # Devia de se enviar o INFO derectamente
+    # Devia de se enviar o INFO directamente?
     data = {
         "team_a": info["team_a"]["goals"],
         "team_b": info["team_b"]["goals"]
@@ -98,7 +98,6 @@ GPIO.add_event_detect(20, GPIO.FALLING, callback=_goal_team_a, bouncetime=300)
 GPIO.add_event_detect(21, GPIO.FALLING, callback=_goal_team_b, bouncetime=300)
 _send_score()
 
-# TODO: ...
 
 @route('/')
 @route('/index.html')
@@ -113,12 +112,11 @@ def reset():
     info["team_b"]["goals"] = 0
     _send_score()
 
+
 @route('/menu')
 def menu():
     return "to do..."
 
 run(host='0.0.0.0', port=80)
-
-# TODO: ...
 
 GPIO.cleanup()  # clean up GPIO
