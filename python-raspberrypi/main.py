@@ -1,8 +1,8 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 
-# PORTO 20 sempre que recebe um impulso a 1 vindo do arduino (ou do sensor), incrementa o numero de golos da equipa A e manda notificação
-# PORTO 21 sempre que recebe um impulso a 1 vindo do arduino (ou do sensor), incrementa o numero de golos da equipa B e manda notificação
+# PORTO 17 sempre que recebe um impulso a 1 vindo do arduino (ou do sensor), incrementa o numero de golos da equipa A e manda notificação
+# PORTO 27 sempre que recebe um impulso a 1 vindo do arduino (ou do sensor), incrementa o numero de golos da equipa B e manda notificação
 
 from bottle import route, run, template
 import json
@@ -34,8 +34,8 @@ print "URL:", url
 
 # TODO: Usar Gevent-socketio para notificações em realtime
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(20, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # or PUD_UP ?
-GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # or PUD_UP ?
+GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # PUD_DOWN enable with 3.3v or 5v | PUD_UP if enable with 0v
+GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # PUD_DOWN enable with 3.3v or 5v | PUD_UP if enable with 0v
 
 info = {
     "team_a": {
@@ -94,8 +94,8 @@ def _goal_team_b(pin_number):
     _send_score()
 
 
-GPIO.add_event_detect(20, GPIO.FALLING, callback=_goal_team_a, bouncetime=300)
-GPIO.add_event_detect(21, GPIO.FALLING, callback=_goal_team_b, bouncetime=300)
+GPIO.add_event_detect(17, GPIO.FALLING, callback=_goal_team_a, bouncetime=300)
+GPIO.add_event_detect(27, GPIO.FALLING, callback=_goal_team_b, bouncetime=300)
 _send_score()
 
 
