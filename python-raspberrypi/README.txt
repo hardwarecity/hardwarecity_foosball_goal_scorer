@@ -1,6 +1,6 @@
 PROJECT: ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sensors <--> Arduino <--> Raspberry Pi <--> Firebase <--> Web App
+Sensors <--> Raspberry Pi <--> Firebase <--> Web App
 
 RASPBERRY PI:
 Listen (with interrupts) PORT 20 (Team A) and PORT 21 (Team B).
@@ -15,6 +15,17 @@ sudo apt-get upgrade -y
 sudo apt-get install -y python-dev python3-dev
 sudo apt-get install -y python-pip python3-pip
 sudo pip install bottle
+
+# WS281x LEDS:
+    https://learn.adafruit.com/neopixels-on-raspberry-pi/software
+sudo apt-get update -y
+sudo apt-get install -y build-essential python-dev git scons swig
+git clone https://github.com/jgarff/rpi_ws281x.git
+cd rpi_ws281x
+scons
+cd python
+sudo python setup.py install
+
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

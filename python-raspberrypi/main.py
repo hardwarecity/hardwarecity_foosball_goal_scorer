@@ -8,6 +8,7 @@ from bottle import route, run, template
 import json
 import requests
 import RPi.GPIO as GPIO
+from subprocess import call
 __author__ = 'Hardware City'
 
 try:
@@ -34,8 +35,10 @@ print "URL:", url
 
 # TODO: Usar Gevent-socketio para notificações em realtime
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # PUD_DOWN enable with 3.3v or 5v | PUD_UP if enable with 0v
-GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # PUD_DOWN enable with 3.3v or 5v | PUD_UP if enable with 0v
+#GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # PUD_DOWN enable with 3.3v or 5v | PUD_UP if enable with 0v
+#GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # PUD_DOWN enable with 3.3v or 5v | PUD_UP if enable with 0v
+GPIO.setup(17, GPIO.IN)  # PUD_DOWN enable with 3.3v or 5v | PUD_UP if enable with 0v
+GPIO.setup(27, GPIO.IN)  # PUD_DOWN enable with 3.3v or 5v | PUD_UP if enable with 0v
 
 info = {
     "team_a": {
@@ -75,7 +78,10 @@ def _send_score():
         "team_a": info["team_a"]["goals"],
         "team_b": info["team_b"]["goals"]
     }
-    r = requests.put(url=url, data=json.dumps(data))
+    try:
+        r = requests.put(url=url, data=json.dumps(data))
+    except:
+        print "ERROR: Score Connection Fail!"
     # print r.status_code
     # print r.content
 
@@ -85,6 +91,7 @@ def _goal_team_a(pin_number):
     print "GOAL A!"
     info["team_a"]["goals"] += 1
     _send_score()
+    call(["python", "blink_A.py"])
 
 
 def _goal_team_b(pin_number):
@@ -92,10 +99,11 @@ def _goal_team_b(pin_number):
     print "GOAL B!"
     info["team_b"]["goals"] += 1
     _send_score()
+    call(["python", "blink_B.py"])
 
 
-GPIO.add_event_detect(17, GPIO.FALLING, callback=_goal_team_a, bouncetime=300)
-GPIO.add_event_detect(27, GPIO.FALLING, callback=_goal_team_b, bouncetime=300)
+GPIO.add_event_detect(17, GPIO.FALLING, callback=_goal_team_a, bouncetime=3000)
+GPIO.add_event_detect(27, GPIO.FALLING, callback=_goal_team_b, bouncetime=3000)
 _send_score()
 
 
