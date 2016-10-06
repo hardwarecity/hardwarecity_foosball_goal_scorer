@@ -11,6 +11,8 @@ import RPi.GPIO as GPIO
 from subprocess import call
 __author__ = 'Hardware City'
 
+MAX_GOAL = 5
+
 try:
     GPIO.cleanup()  # clean up GPIO
 except:
@@ -91,6 +93,11 @@ def _goal_team_a(pin_number):
     print "GOAL A!"
     info["team_a"]["goals"] += 1
     _send_score()
+    # Mesmo que o IF seguinte seja executado, tem que enviar o score com o MAX_GOAL antes de reiniciar (por casua do codigo do miguel)
+    if info["team_a"]["goals"] >= MAX_GOAL:
+        info["team_a"]["goals"] = 0
+        info["team_b"]["goals"] = 0
+        _send_score()
     call(["python", "blink_A.py"])
 
 
@@ -98,7 +105,11 @@ def _goal_team_b(pin_number):
     # TODO: Usar Gevent-socketio para notificações em realtime
     print "GOAL B!"
     info["team_b"]["goals"] += 1
-    _send_score()
+    _send_score() # Mesmo que o IF seguinte seja executado, tem que enviar o score com o MAX_GOAL antes de reiniciar (por casua do codigo do miguel)
+    if info["team_b"]["goals"] >= MAX_GOAL:
+        info["team_a"]["goals"] = 0
+        info["team_b"]["goals"] = 0
+        _send_score()
     call(["python", "blink_B.py"])
 
 
