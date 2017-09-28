@@ -150,11 +150,8 @@ def _goal_team_a(pin_number=None):
             # rainbowCycle(strip)
             # theaterChaseRainbow(strip)
             a += 1
-        colorWipe(strip_A, Color(0, 0, 0))
-        colorWipe(strip_A, Color(0, 0, 0))
-        colorWipe(strip_A, Color(0, 0, 0))
-        colorWipe(strip_A, Color(0, 0, 0))
-        colorWipe(strip_A, Color(0, 0, 0))
+        for i in range(LED_COUNT):
+            colorWipe(strip_A, Color(0, 0, 0))
         strip_A.show()
 
 def _goal_team_b(pin_number=None):
@@ -183,11 +180,8 @@ def _goal_team_b(pin_number=None):
             # rainbowCycle(strip)
             # theaterChaseRainbow(strip)
             a += 1
-        colorWipe(strip_B, Color(0, 0, 0))
-        colorWipe(strip_B, Color(0, 0, 0))
-        colorWipe(strip_B, Color(0, 0, 0))
-        colorWipe(strip_B, Color(0, 0, 0))
-        colorWipe(strip_B, Color(0, 0, 0))
+        for i in range(LED_COUNT):
+            colorWipe(strip_B, Color(0, 0, 0))
         strip_B.show()
 
 GPIO.add_event_detect(17, GPIO.FALLING, callback=_goal_team_a, bouncetime=3000)
