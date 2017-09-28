@@ -23,12 +23,22 @@ LED_DMA        = 5       # DMA channel to use for generating signal (try 5)
 LED_BRIGHTNESS = 255     # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 
-strip_A = Adafruit_NeoPixel(LED_COUNT, LED_PIN_A, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
-strip_B = Adafruit_NeoPixel(LED_COUNT, LED_PIN_B, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
-strip_A.begin()
-strip_A.show()
-strip_B.begin()
-strip_B.show()
+strip_A = None
+strip_B = None
+try:
+    strip_A = Adafruit_NeoPixel(LED_COUNT, LED_PIN_A, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
+except Exception as e:
+    pass
+try:
+    strip_B = Adafruit_NeoPixel(LED_COUNT, LED_PIN_B, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
+except Exception as e:
+    pass
+if strip_A is not None:
+    strip_A.begin()
+    strip_A.show()
+if strip_B is not None:
+    strip_B.begin()
+    strip_B.show()
 
 MAX_GOAL = 5
 
@@ -118,22 +128,23 @@ def _goal_team_a(pin_number=None):
         info["team_b"]["goals"] = 0
         _send_score()
     # call(["python", "blink_A.py"])
-    a = 1
-    while a < 5:
-        # Color wipe animations.
-        colorWipe(strip_A, Color(255, 0, 0))  # Red wipe
-        colorWipe(strip_A, Color(0, 255, 0))  # Blue wipe
-        colorWipe(strip_A, Color(0, 0, 255))  # Green wipe
-        # Theater chase animations.
-        # theaterChase(strip, Color(127, 127, 127))  # White theater chase
-        # theaterChase(strip, Color(127,   0,   0))  # Red theater chase
-        # theaterChase(strip, Color(  0,   0, 127))  # Blue theater chase
-        # Rainbow animations.
-        # rainbow(strip)
-        # rainbowCycle(strip)
-        # theaterChaseRainbow(strip)
-        a += 1
-    strip_A.show()
+    if strip_A is not None:
+        a = 1
+        while a < 5:
+            # Color wipe animations.
+            colorWipe(strip_A, Color(255, 0, 0))  # Red wipe
+            colorWipe(strip_A, Color(0, 255, 0))  # Blue wipe
+            colorWipe(strip_A, Color(0, 0, 255))  # Green wipe
+            # Theater chase animations.
+            # theaterChase(strip, Color(127, 127, 127))  # White theater chase
+            # theaterChase(strip, Color(127,   0,   0))  # Red theater chase
+            # theaterChase(strip, Color(  0,   0, 127))  # Blue theater chase
+            # Rainbow animations.
+            # rainbow(strip)
+            # rainbowCycle(strip)
+            # theaterChaseRainbow(strip)
+            a += 1
+        strip_A.show()
 
 def _goal_team_b(pin_number):
     # TODO: Usar Gevent-socketio para notificações em realtime
@@ -145,22 +156,23 @@ def _goal_team_b(pin_number):
         info["team_b"]["goals"] = 0
         _send_score()
     # call(["python", "blink_B.py"])
-    a = 1
-    while a < 5:
-        # Color wipe animations.
-        colorWipe(strip_B, Color(255, 0, 0))  # Red wipe
-        colorWipe(strip_B, Color(0, 255, 0))  # Blue wipe
-        colorWipe(strip_B, Color(0, 0, 255))  # Green wipe
-        # Theater chase animations.
-        # theaterChase(strip, Color(127, 127, 127))  # White theater chase
-        # theaterChase(strip, Color(127,   0,   0))  # Red theater chase
-        # theaterChase(strip, Color(  0,   0, 127))  # Blue theater chase
-        # Rainbow animations.
-        # rainbow(strip)
-        # rainbowCycle(strip)
-        # theaterChaseRainbow(strip)
-        a += 1
-    strip_B.show()
+    if strip_B is not None:
+        a = 1
+        while a < 5:
+            # Color wipe animations.
+            colorWipe(strip_B, Color(255, 0, 0))  # Red wipe
+            colorWipe(strip_B, Color(0, 255, 0))  # Blue wipe
+            colorWipe(strip_B, Color(0, 0, 255))  # Green wipe
+            # Theater chase animations.
+            # theaterChase(strip, Color(127, 127, 127))  # White theater chase
+            # theaterChase(strip, Color(127,   0,   0))  # Red theater chase
+            # theaterChase(strip, Color(  0,   0, 127))  # Blue theater chase
+            # Rainbow animations.
+            # rainbow(strip)
+            # rainbowCycle(strip)
+            # theaterChaseRainbow(strip)
+            a += 1
+        strip_B.show()
 
 GPIO.add_event_detect(17, GPIO.FALLING, callback=_goal_team_a, bouncetime=3000)
 GPIO.add_event_detect(27, GPIO.FALLING, callback=_goal_team_b, bouncetime=3000)
