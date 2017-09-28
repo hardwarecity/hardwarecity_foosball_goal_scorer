@@ -34,11 +34,17 @@ try:
 except Exception as e:
     pass
 if strip_A is not None:
-    strip_A.begin()
-    strip_A.show()
+    try:
+        strip_A.begin()
+        strip_A.show()
+    except Exception as e:
+        strip_A = None
 if strip_B is not None:
-    strip_B.begin()
-    strip_B.show()
+    try:
+        strip_B.begin()
+        strip_B.show()
+    except Exception as e:
+        strip_B = None
 
 MAX_GOAL = 5
 
