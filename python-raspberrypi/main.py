@@ -152,7 +152,7 @@ def _goal_team_a(pin_number=None):
             a += 1
         strip_A.show()
 
-def _goal_team_b(pin_number):
+def _goal_team_b(pin_number=None):
     # TODO: Usar Gevent-socketio para notificações em realtime
     print "GOAL B!"
     info["team_b"]["goals"] += 1
